@@ -107,13 +107,13 @@ def card_table():
                         if not game.betting and not betting_round and game.round_num < num_rounds:
                             while not game.betting and not betting_round and game.round_num < num_rounds:
                                 betting_round = dealRound(game_id)  # deal a round of cards
-                                time.sleep(0.3) # let data load before updating all pages
+                                time.sleep(1) # let data load before updating all pages
                                 socketio.emit("lobby update") # notify other players
                                 socketio.emit(str(game_id) + ": card-table update") # notify other players
                         elif not game.betting and game.round_num >= num_rounds:  # done with game
                             if game.game_status != 2:
                                 gameEnd(game_id)
-                                time.sleep(0.3)
+                                time.sleep(1)
                                 socketio.emit("lobby update") # notify other players
                                 socketio.emit("leaderboard update")
                                 socketio.emit(str(game_id) + ": card-table update") # notify other players
